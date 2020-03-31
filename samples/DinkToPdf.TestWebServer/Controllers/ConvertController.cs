@@ -8,12 +8,12 @@ using System.IO;
 
 namespace DinkToPdf.TestWebServer.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/values")]
     public class ConvertController : Controller
     {
-        private IConverter _converter;
+        private DinkToPdf.Contracts.IConverter _converter;
 
-        public ConvertController(IConverter converter)
+        public ConvertController(DinkToPdf.Contracts.IConverter converter)
         {
             _converter = converter;
         }
@@ -32,19 +32,19 @@ namespace DinkToPdf.TestWebServer.Controllers
                 Objects = {
                     new ObjectSettings()
                     {
-                        Page = "http://google.com/",
+                        Page = "https://google.com/"
                     },
                      new ObjectSettings()
                     {
-                        Page = "https://github.com/",
-                         
+                        Page = "https://github.com/"
                     }
                 }
             };
            
             byte[] pdf = _converter.Convert(doc);
 
-            return File(pdf, "application/pdf", "Test.pdf");
+
+            return new FileContentResult(pdf, "application/pdf");
         }
     }
 }

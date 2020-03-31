@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "DinkToPdf.TestConsoleApp.x64.core31": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "environmentVariables": {
+        "LD_DEBUG": "libs"
+      }
+    }
+  }
+}

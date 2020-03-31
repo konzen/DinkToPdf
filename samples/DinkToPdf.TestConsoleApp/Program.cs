@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.DotNet.PlatformAbstractions;
+using System;
+using System.Diagnostics;
 using System.IO;
-using DinkToPdf;
-using System.Runtime.Loader;
+using System.Reflection;
+using System.Runtime.Versioning;
 
 namespace DinkToPdf.ConsoleApp
 {
@@ -12,6 +11,15 @@ namespace DinkToPdf.ConsoleApp
     {
         public static void Main(string[] args)
         {
+            Console.WriteLine(
+                $"RID: {RuntimeEnvironment.GetRuntimeIdentifier()}, " +
+                $"OS: {RuntimeEnvironment.OperatingSystem}, " +
+                $"OSPlatform: {RuntimeEnvironment.OperatingSystemPlatform}, " +
+                $"OSVersion: {RuntimeEnvironment.OperatingSystemVersion}, " +
+                $"Architecture: {RuntimeEnvironment.RuntimeArchitecture}, " +
+                $"Framework: {Assembly.GetEntryAssembly()?.GetCustomAttribute<TargetFrameworkAttribute>()?.FrameworkName}"
+            );
+
             var converter = new BasicConverter(new PdfTools());
 
             converter.PhaseChanged += Converter_PhaseChanged;
@@ -52,6 +60,11 @@ namespace DinkToPdf.ConsoleApp
             using (var stream = new FileStream(Path.Combine("Files", DateTime.UtcNow.Ticks.ToString() + ".pdf"), FileMode.Create))
             {
                 stream.Write(pdf, 0, pdf.Length);
+            }
+
+            if (!Debugger.IsAttached)
+            {
+                Console.ReadKey();
             }
         }
 

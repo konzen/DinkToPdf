@@ -1,20 +1,18 @@
 # DinkToPdf
-.NET Core P/Invoke wrapper for wkhtmltopdf library that uses Webkit engine to convert HTML pages to PDF.
+.NET Standard 2.0 P/Invoke wrapper for wkhtmltopdf library that uses WebKit rendering engine to convert HTML pages to PDF.
 
 ### Install 
 
-Library can be installed through Nuget. Run command bellow from the package manager console:
+Library can be installed through NuGet. Run command bellow from the package manager console:
 
 ```
-PM> Install-Package DinkToPdf
+PM> Install-Package DinkToPdf.Standard
 ```
 
-Copy native library to root folder of your project. From there .NET Core loads native library when native method is called with P/Invoke. You can find latest version of native library [here](https://github.com/rdvojmoc/DinkToPdf/tree/master/v0.12.4). Select appropriate library for your OS and platform (64 or 32 bit).
+On Linux or macOS install the wkhtmltopdf package on the OS.
 
-### IMPORTANT
-Library was NOT tested with IIS. Library was tested in console applications and with Kestrel web server both for Web Application and Web API . 
-
-### 
+### NuGet package
+https://www.nuget.org/packages/DinkToPdf.Standard
 
 ### Basic converter
 Use this converter in single threaded applications.
@@ -88,6 +86,6 @@ Converter must be registered as singleton.
 public void ConfigureServices(IServiceCollection services)
 {
     // Add converter to DI
-    services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
+    services.AddSingleton<IConverter>(new SynchronizedConverter(new PdfTools()));
 }
 ```

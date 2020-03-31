@@ -1,44 +1,40 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <VersionPrefix>1.0.8</VersionPrefix>
-    <TargetFramework>netstandard1.6</TargetFramework>
-    <NoWarn>$(NoWarn);1591</NoWarn>
-    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <Version>1.1.0</Version>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>DinkToPdf</AssemblyName>
-    <PackageId>Haukcode.DinkToPdf</PackageId>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
+    <PackageId>DinkToPdf.Standard</PackageId>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
-    <Version>1.1.2</Version>
+    <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Authors>rdvojmoc, HakanL</Authors>
-    <RepositoryUrl>https://github.com/HakanL/DinkToPdf</RepositoryUrl>
-    <RepositoryType>Github</RepositoryType>
+    <IncludeBuildOutput>true</IncludeBuildOutput>
+    <Authors>rdvojmoc;HakanL;konzen</Authors>
+    <RepositoryUrl>https://github.com/konzen/DinkToPdf.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Description>.NET Core P/Invoke wrapper for wkhtmltopdf library that uses Webkit engine to convert HTML pages to PDF.</Description>
+    <PackageProjectUrl>https://github.com/konzen/DinkToPdf</PackageProjectUrl>
+    <PackageTags>wkhtmltopdf;netstandard;netcore;html;pdf;wrapper</PackageTags>
+    <Title>.NET Standard 2.0 converter of HTML pages to PDF.</Title>
+    <AssemblyTitle>.NET Standard 2.0 converter of HTML pages to PDF.</AssemblyTitle>
+    <Description>.NET Standard 2.0 P/Invoke wrapper for wkhtmltopdf library that uses WebKit rendering engine to convert HTML pages to PDF.</Description>
+    <PackageReleaseNotes>Forked from https://github.com/HakanL/DinkToPdf version.
+.NET Standard 2.0.
+Windows native libraries wkhtmltopdf v0.12.5.
+On Linux or macOS install the wkhtmltopdf package on the OS.
+Assembly signed.</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <IncludeSymbols>true</IncludeSymbols>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="bin\Debug\netstandard1.6\DinkToPdf.pdb;bin\Debug\netstandard1.6\DinkToPdf.xml;bin\Debug\netstandard1.6\DinkToPdf.dll">
-      <PackagePath>lib/netstandard1.6/</PackagePath>
-      <Pack>true</Pack>
-    </None>
-    <None Include="runtimes\linux-x64\native\libwkhtmltox.so" Pack="true" PackagePath="runtimes\linux-x64\native" />
-    <None Include="runtimes\linux-x86\native\libwkhtmltox.so" Pack="true" PackagePath="runtimes\linux-x86\native" />
-    <None Include="runtimes\osx-x64\native\libwkhtmltox.dylib" Pack="true" PackagePath="runtimes\osx-x64\native" />
-    <None Include="runtimes\win-x64\native\wkhtmltox.dll" Pack="true" PackagePath="runtimes\win-x64\native" />
-    <None Include="runtimes\win-x86\native\wkhtmltox.dll" Pack="true" PackagePath="runtimes\win-x86\native" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="System.Collections.Concurrent" Version="4.3.0" />
-    <PackageReference Include="System.Globalization" Version="4.3.0" />
-    <PackageReference Include="System.Reflection.TypeExtensions" Version="4.5.1" />
-    <PackageReference Include="System.Runtime" Version="4.3.1" />
-    <PackageReference Include="System.Runtime.InteropServices" Version="4.3.0" />
-    <PackageReference Include="System.Threading.Thread" Version="4.3.0" />
+    <None Include="runtimes\**" Pack="true" PackagePath="runtimes" />
   </ItemGroup>
 
 </Project>
